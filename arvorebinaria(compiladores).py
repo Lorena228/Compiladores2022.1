@@ -34,16 +34,32 @@ def mostrarEmOrdem(aux):
         mostrarEmOrdem(aux["dir"])
 
 
+def mostrarEmPreOrdem(aux):
+    if (not vazio(aux)):
+        print(aux['num'], end=" ")
+        mostrarEmPreOrdem(aux["esq"])
+        mostrarEmPreOrdem(aux["dir"])
+
+
+def mostrarEmPosOrdem(aux):
+    if (not vazio(aux)):
+        mostrarEmPosOrdem(aux["esq"])
+        mostrarEmPosOrdem(aux["dir"])
+        print(aux["num"], end=" ")
+
+
 while (opt != 5):
     print('MENU - ÁRVORE BINÁRIA')
     print('1-Inserir número')
     print('2-Consultar números pares')
     print('3-Consultar toda a arvore em ordem')
     print('4-Esvaziar a árvore')
-    print('5-Sair')
+    print('5-Consultar árvore em pré-ordem')
+    print('6-Consultar árvore em pós-ordem')
+    print('7-Sair')
 
     opt = int(input("Digite um dos números acima: "))
-    if (1 < opt > 5):
+    if (1 < opt > 7):
         print("Opção inválida")
     elif (opt == 1):
         raiz = inserirArvore(
@@ -60,3 +76,13 @@ while (opt != 5):
             mostrarEmOrdem(raiz)
     elif (opt == 4):
         raiz.clear
+    elif (opt == 5):
+        if (vazio(raiz)):
+            print('Árvore Vazia')
+        else:
+            mostrarEmPreOrdem(raiz)
+    elif (opt == 6):
+        if (vazio(raiz)):
+            print('Árvore Vazia')
+        else:
+            mostrarEmPosOrdem(raiz)
